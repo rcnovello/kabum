@@ -1,6 +1,6 @@
 <?php
 
-    echo "Clientes"; 
+    echo "Conn PDO"; 
 
 
     #$dsn = "mysql:host=localhost:8889;dbname=kabum;charset=utf8mb4";
@@ -20,5 +20,9 @@
     }
 
     echo "<br>fim"; 
+
+
+
+
 
 ?>
