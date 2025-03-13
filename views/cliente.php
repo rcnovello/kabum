@@ -1,9 +1,9 @@
 <?php
 
-    echo "Cliente"; 
+    echo "Cliente </ br> </br>"; 
 
 
-    $dsn = "mysql:host=localhost:8889;dbname=kabum;charset=utf8mb4";
+    $dsn = "mysql:host=db:3306;dbname=kabum;charset=utf8mb4";
     $user = "root";
     $pass = "root";
 
