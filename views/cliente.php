@@ -3,8 +3,13 @@ $cClienteController = require __DIR__ . '/../app/presentation/controllers/client
 
 echo "Cliente </ br> </br>"; 
 
-echo "Rota GET Clientes: <p>";
-$cliente = ControllerService::GET();
+echo "<p>Rota GET Clientes: </br>";
+//$cliente = ControllerService::GET();
+print_r(ControllerService::GET());
+
+echo "<p>Rota POST Clientes: <p></br>";
+//$cliente = ControllerService::POST();
+print_r(ControllerService::POST());
 
 
 

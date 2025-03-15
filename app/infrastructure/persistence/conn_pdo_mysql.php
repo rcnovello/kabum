@@ -5,24 +5,12 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-/*
-    //require_once 'Database.php';
-
-    try {
-        $pdo = Database::getConnection();
-        echo "Conexão bem-sucedida!";
-    } catch (Exception $e) {
-        echo "Erro: " . $e->getMessage();
-    }
-        */
-
 class Database {
     private static $pdo = null;
 
     private function __construct() {
         // Evita instanciação externa
-    }
-    
+    }    
 
     public static function getConnection() {
         if (self::$pdo === null) {

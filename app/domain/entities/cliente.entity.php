@@ -1,55 +1,72 @@
 <?php
+
 class Cliente {
-    private int $id;
-    private string $nome;
-    private string $email;
-    private string $telefone;
+    private ?int $cd_cliente;
+    private string $nm_cliente;
+    private string $dt_nasc;
+    private string $nr_cpf;
+    private string $nr_rg;
+    private string $nr_telefone;
 
-    // Construtor
-    public function __construct(int $id, string $nome, string $email, string $telefone) {
-        $this->id = $id;
-        $this->nome = $nome;
-        $this->email = $email;
-        $this->telefone = $telefone;
+    public function __construct(
+        string $nm_cliente,
+        string $dt_nasc,
+        string $nr_cpf,
+        string $nr_rg,
+        string $nr_telefone,
+        ?int $cd_cliente = null
+    ) {
+        $this->cd_cliente = $cd_cliente;
+        $this->nm_cliente = $nm_cliente;
+        $this->dt_nasc = $dt_nasc;
+        $this->nr_cpf = $nr_cpf;
+        $this->nr_rg = $nr_rg;
+        $this->nr_telefone = $nr_telefone;
     }
 
-    // Métodos GET
-    public function getId(): int {
-        return $this->id;
+    // Métodos Getters
+    public function getCdCliente(): ?int {
+        return $this->cd_cliente;
     }
 
-    public function getNome(): string {
-        return $this->nome;
+    public function getNmCliente(): string {
+        return $this->nm_cliente;
     }
 
-    public function getEmail(): string {
-        return $this->email;
+    public function getDtNasc(): string {
+        return $this->dt_nasc;
     }
 
-    public function getTelefone(): string {
-        return $this->telefone;
+    public function getNrCpf(): string {
+        return $this->nr_cpf;
     }
 
-    // Métodos SET
-    public function setNome(string $nome): void {
-        $this->nome = $nome;
+    public function getNrRg(): string {
+        return $this->nr_rg;
     }
 
-    public function setEmail(string $email): void {
-        $this->email = $email;
+    public function getNrTelefone(): string {
+        return $this->nr_telefone;
     }
 
-    public function setTelefone(string $telefone): void {
-        $this->telefone = $telefone;
+    // Métodos Setters
+    public function setNmCliente(string $nm_cliente) {
+        $this->nm_cliente = $nm_cliente;
     }
 
-    // Método para exibir informações
-    public function exibirCliente(): void {
-        echo "Cliente: {$this->nome} | Email: {$this->email} | Telefone: {$this->telefone}\n";
+    public function setDtNasc(string $dt_nasc) {
+        $this->dt_nasc = $dt_nasc;
+    }
+
+    public function setNrCpf(string $nr_cpf) {
+        $this->nr_cpf = $nr_cpf;
+    }
+
+    public function setNrRg(string $nr_rg) {
+        $this->nr_rg = $nr_rg;
+    }
+
+    public function setNrTelefone(string $nr_telefone) {
+        $this->nr_telefone = $nr_telefone;
     }
 }
-
-// Exemplo de uso
-$cliente1 = new Cliente(1, "João Silva", "joao@email.com", "(11) 99999-9999");
-$cliente1->exibirCliente();
-?>
