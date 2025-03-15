@@ -1,5 +1,42 @@
 <?php
 
+require __DIR__ . '/../../../vendor/autoload.php';
+echo "Autoload funcionando!";
+
+use Dotenv\Dotenv;
+
+class Database {
+    private static $pdo = null;
+
+    private function __construct() {
+        // Evita instanciação externa
+    }
+
+    public static function getConnection() {
+        if (self::$pdo === null) {
+            $dotenv = Dotenv::createImmutable(__DIR__);
+            $dotenv->load();
+
+            $host = $_ENV['DB_HOST'] ?? 'localhost';
+            $dbname = $_ENV['DB_NAME'] ?? 'test';
+            $user = $_ENV['DB_USER'] ?? 'root';
+            $password = $_ENV['DB_PASSWORD'] ?? '';
+            $port = $_ENV['DB_PORT'] ?? '3306';
+
+            try {
+                $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+                self::$pdo = new PDO($dsn, $user, $password);
+                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+            }
+        }
+        return self::$pdo;
+    }
+}
+
+
+/*
     echo "Conn PDO"; 
 
 
@@ -20,7 +57,7 @@
     }
 
     echo "<br>fim"; 
-
+*/
 
 
 
