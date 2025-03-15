@@ -1,6 +1,9 @@
 <?php
-$cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';    
+//$cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
 
+//ControllerService::POST()
+
+/*
 echo "Cliente </ br> </br>"; 
 
 echo "<p>Rota GET Clientes: </br>";
@@ -14,6 +17,7 @@ print_r(ControllerService::POST());
 
 
 echo "<br>fim"; 
+*/
     
 
 ?>
