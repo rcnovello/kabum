@@ -26,17 +26,17 @@ class ClienteController {
         }
 
         $cliente = new Cliente(
-            "TESTES DE TEST",
-            "1991-11-12 00:00:00",
-            "40591386111",
-            "47948664111",
-            "19996228551"
+            $dados['nm_cliente'] ?? '',
+            $dados['dt_nasc'] ?? '',
+            $dados['nr_cpf'] ?? '',
+            $dados['nr_rg'] ?? '',
+            $dados['nr_telefone'] ?? '',
         );
         
         return json_encode(self::$clienteService->create_cliente($cliente));
     }
 
-    public static function PUT() {
+    public static function PUT($dados) {
 
         if (self::$clienteService === null) {
             require_once __DIR__ . '/../../domain/entities/cliente.entity.php';
@@ -44,33 +44,19 @@ class ClienteController {
             self::$clienteService = new ClienteService();
         }
 
-
-        /*
         $cliente = new Cliente(
-            [
-                'cd_cliente'    => 1,
-                'nm_cliente'    => 'Teste Atualizado',
-                'dt_nasc'       => '1992-01-01',
-                'nr_cpf'        => '12345678900',
-                'nr_rg'         => '123456789',
-                'nr_telefone'   => '11987654321'
-            ]
-        );
-        */
-
-        $cliente = new Cliente(
-            "TESTES DE TEST 2",
-            "1991-11-12 00:00:00",
-            "40591386111",
-            "47948664111",
-            "19996228551",
-            1
+            $dados['nm_cliente'],
+            $dados['dt_nasc'],
+            $dados['nr_cpf'],
+            $dados['nr_rg'],
+            $dados['nr_telefone'],
+            $dados['cd_cliente'],
         );
         
         return json_encode(self::$clienteService->update_cliente($cliente));
     }
 
-    public static function DELETE() {
+    public static function DELETE($dados) {
 
         if (self::$clienteService === null) {
             require_once __DIR__ . '/../../domain/entities/cliente.entity.php';
@@ -78,27 +64,13 @@ class ClienteController {
             self::$clienteService = new ClienteService();
         }
 
-
-        /*
         $cliente = new Cliente(
-            [
-                'cd_cliente'    => 1,
-                'nm_cliente'    => 'Teste Atualizado',
-                'dt_nasc'       => '1992-01-01',
-                'nr_cpf'        => '12345678900',
-                'nr_rg'         => '123456789',
-                'nr_telefone'   => '11987654321'
-            ]
-        );
-        */
-
-        $cliente = new Cliente(
-            "TESTES DE TEST 2",
-            "1991-11-12 00:00:00",
-            "40591386111",
-            "47948664111",
-            "19996228551",
-            7
+            $dados['nm_cliente'],
+            $dados['dt_nasc'],
+            $dados['nr_cpf'],
+            $dados['nr_rg'],
+            $dados['nr_telefone'],
+            $dados['cd_cliente']
         );
         
         return json_encode(self::$clienteService->delete_cliente($cliente));

@@ -1,7 +1,7 @@
 <?php
 
+
     require __DIR__ . '/../vendor/autoload.php';
-    
     $router = new AltoRouter();
 
     // Função para verificar login
@@ -12,7 +12,6 @@
             exit;
         }
     }
-
 
     $router->map('POST', '/login', function() {
         $dados = json_decode(file_get_contents('php://input'), true);
@@ -67,28 +66,53 @@
         header("Location: /home");
     });
 
-    $router->map('GET', '/cliente', function() {
+    $router->map('GET', '/portal-admin', function() {
+        verificarLogin(); 
+        require __DIR__ . '/../views/portal-admin.php';
+        
+    });
+
+
+    $router->map('GET', '/sobre', function() {
+        require __DIR__ . '/../views/sobre.php';
+        
+    });
+
+
+
+    $router->map('GET', '/api/cliente', function() {
         verificarLogin();
         $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
         print_r(ClienteController::GET());
     });
 
-    $router->map('POST', '/cliente', function() {
-        verificarLogin();
-        $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
-        print_r(ClienteController::POST());
+    $router->map('GET', '/cliente', function() {
+        verificarLogin(); 
+        require __DIR__ . '/../views/portal-admin.php';
     });
 
-    $router->map('PUT', '/cliente', function() {
+    $router->map('POST', '/api/cliente', function() {
         verificarLogin();
+        $dados = json_decode(file_get_contents('php://input'), true);  
         $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
-        print_r(ClienteController::PUT());
+        print_r(ClienteController::POST($dados));
     });
 
-    $router->map('DELETE', '/cliente', function() {
+    $router->map('PUT', '/api/cliente', function() {
         verificarLogin();
-        $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
-        print_r(ClienteController::DELETE());
+        $dados = json_decode(file_get_contents('php://input'), true);  
+        $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';           
+        print_r(ClienteController::PUT($dados));
+    });
+
+    $router->map('DELETE', '/api/cliente', function() {
+        verificarLogin();
+        $dados = json_decode(file_get_contents('php://input'), true);  
+        $cClienteController = require_once __DIR__ . '/../app/presentation/controllers/cliente.controller.php';       
+        $clienteController = new ClienteController();  
+        $resultado = $clienteController->delete($dados['cd_cliente']);  
+        header('Content-Type: application/json');
+        echo json_encode(["success" => $resultado]);
     });
 
     $match = $router->match();
@@ -100,32 +124,6 @@
         $arr = array('success' => false, 'message' => 'Página não encontrada!', 'data' => '{}', 'errors' => "500");
         print_r(json_encode($arr));
     }
-
-
-    /*
-    $request = $_SERVER['REQUEST_URI'];    
-
-    switch ($request) {
-        case '/' :                        
-            require __DIR__ . '/../views/home.php';
-            break;
-        case '/login' :
-            require __DIR__ . '/../views/login.php';
-            break;
-        case '/cliente' :
-            require __DIR__ . '/../views/cliente.php';
-            break;    
-        case '/pdo' :
-            require __DIR__ . '/../app/infrastructure/persistence/conn_pdo_mysql.php';
-            break;   
-        default:
-            http_response_code(404);
-            echo "Página não encontrada!";
-            break;
-    }
-            */
-    
-    
 
 ?>
 

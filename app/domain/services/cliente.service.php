@@ -55,26 +55,20 @@ class ClienteService {
             $sql = "UPDATE cliente 
                     SET nm_cliente = :nm_cliente, 
                         dt_nasc = :dt_nasc,                        
-                        nr_telefone = :nr_telefone 
+                        nr_telefone = :nr_telefone,
+                        nr_cpf = :nr_cpf,                        
+                        nr_rg = :nr_rg
                     WHERE cd_cliente = :cd_cliente";
 
             $stmt = $pdo->prepare($sql); 
 
             $stmt->bindValue(':nm_cliente', $cliente->getNmCliente());
             $stmt->bindValue(':dt_nasc', $cliente->getDtNasc());
-            //$stmt->bindValue(':nr_cpf', $cliente->getNrCpf());
-            //$stmt->bindValue(':nr_rg', $cliente->getNrRg());
+            $stmt->bindValue(':nr_cpf', $cliente->getNrCpf());
+            $stmt->bindValue(':nr_rg', $cliente->getNrRg());
             $stmt->bindValue(':nr_telefone', $cliente->getNrTelefone());
             $stmt->bindValue(':cd_cliente', $cliente->getCdCliente());
             
-            /*
-            $stmt->bindParam(':nm_cliente', $cliente['nm_cliente']);
-            $stmt->bindParam(':dt_nasc', $cliente['dt_nasc']);
-            $stmt->bindParam(':nr_cpf', $cliente['nr_cpf']);
-            $stmt->bindParam(':nr_rg', $cliente['nr_rg']);
-            $stmt->bindParam(':nr_telefone', $cliente['nr_telefone']);
-            $stmt->bindParam(':cd_cliente', $cliente['cd_cliente']);
-            */
 
             $stmt->execute();     
 
@@ -82,7 +76,7 @@ class ClienteService {
             //$retJson = '{"success":true,"data":$lastId,"errors":{}}';
             return $arr;
         } catch (PDOException $e) {
-            $arr = array('success' => false, 'message' => 'Registro não pode ser alterado.', 'data' => '{}', 'errors' => $e->getMessage());
+            $arr = array('success' => false, 'message' => 'Atenção, registro não foi atualizado devido a um erro.', 'data' => '{}', 'errors' => $e->getMessage());
             //$json = '{"a":$e,"b":2,"c":3,"d":4,"e":5}';
             return $arr;
         }
