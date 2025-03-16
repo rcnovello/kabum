@@ -39,8 +39,14 @@
     });
 
     // Rota de logout
-    $router->map('GET', '/login', function() {              
-        require __DIR__ . '/../views/login.php';
+    $router->map('GET', '/login', function() {       
+        session_start();
+        if (!isset($_SESSION["usuario_logado"])) {
+            require __DIR__ . '/../views/login.php';
+        }else{
+            header("Location: /home");
+        }  
+        
     });
 
     // Rota de logout
@@ -49,7 +55,7 @@
     });
 
     $router->map('GET', '/home', function() {       
-        verificarLogin(); 
+        //verificarLogin(); 
         require __DIR__ . '/../views/home.php';
     });
 
