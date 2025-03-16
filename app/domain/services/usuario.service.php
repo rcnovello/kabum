@@ -2,10 +2,32 @@
 
 
 require_once __DIR__ . '/../../infrastructure/persistence/conn_pdo_mysql.php';
-require_once __DIR__ . '/../../domain/entities/cliente.entity.php';
-//require_once __DIR__ . '/../../application/interfaces/cliente.interfaces.php';
+require_once __DIR__ . '/../../domain/entities/usuario.entity.php';
            
-class ClienteService {
+class UsuarioService {
+
+    public function login_usuario(Usuario $usuario): bool|array{
+        try {        
+            $pdo = Database::getConnection();  
+            $sql = 'SELECT cd_usuario, cd_login, ds_senha FROM usuario where cd_login = :cd_login and ds_senha = :ds_senha';
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindValue(':cd_login', $usuario->getCdLogin());
+            $stmt->bindValue(':ds_senha', $usuario->getDsSenha());
+
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+            //$arr = array('success' => true, 'message' => 'Dados do cliente recuperados ocm sucesso.', 'data' => $cliente, 'errors' => '{}');  
+            //return $arr;
+        } catch (Exception $e) {
+            $arr = array('success' => false, 'message' => 'Erro ao fazer login', 'data' => '{}', 'errors' => $e->getMessage());
+            return $arr;
+        }
+    }
 
     public function find_all_cliente(): array {
         try {        
