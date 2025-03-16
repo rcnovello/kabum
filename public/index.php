@@ -3,6 +3,17 @@
     require __DIR__ . '/../vendor/autoload.php';
     
     $router = new AltoRouter();
+
+    // Função para verificar login
+    function verificarLogin() {
+        session_start();
+        if (!isset($_SESSION["usuario_logado"])) {
+            header("Location: /login");
+            exit;
+        }
+    }
+
+
     $router->map('POST', '/login', function() {
         $dados = json_decode(file_get_contents('php://input'), true);
         
@@ -12,9 +23,11 @@
         $cUsuarioController = require __DIR__ . '/../app/presentation/controllers/usuario.controller.php';   
         $cLogin = UsuarioController::POST_LOGIN();
 
+        session_start();
         if ($cLogin === true) { 
             $_SESSION['usuario_logado'] = $usuario;
-            echo json_encode(["message" => "Login bem-sucedido!"]);
+            //echo json_encode(["message" => "Login bem-sucedido!"]);
+            header("Location: /home"); // Redireciona para a área logada
         } else if($cLogin === false){
             http_response_code(401);
             echo json_encode(["error" => "Credenciais inválidas!"]);
@@ -23,32 +36,30 @@
             print_r($cLogin);
         }
 
-
-        /*
-        if ($usuario === 'admin' && $senha === '1234') { 
-            $_SESSION['usuario_logado'] = $usuario;
-            echo json_encode(["message" => "Login bem-sucedido!"]);
-        } else {
-            http_response_code(401);
-            echo json_encode(["error" => "Credenciais inválidas!"]);
-        }
-        */
     });
 
     // Rota de logout
-    $router->map('POST', '/logout', function() {
-        session_destroy();
-        echo json_encode(["message" => "Logout realizado com sucesso!"]);
+    $router->map('GET', '/login', function() {              
+        require __DIR__ . '/../views/login.php';
     });
 
-    // Função para verificar login
-    function verificarLogin() {
-        if (!isset($_SESSION['usuario_logado'])) {
-            http_response_code(401); // Não autorizado
-            echo json_encode(["error" => "Acesso não autorizado. Faça login."]);
-            exit;
-        }
-    }
+    // Rota de logout
+    $router->map('GET', '/', function() {        
+        require __DIR__ . '/../views/home.php';
+    });
+
+    $router->map('GET', '/home', function() {       
+        verificarLogin(); 
+        require __DIR__ . '/../views/home.php';
+    });
+
+
+    // Rota de logout
+    $router->map('GET', '/logout', function() {
+        session_start();
+        session_destroy();
+        header("Location: /home");
+    });
 
     $router->map('GET', '/cliente', function() {
         verificarLogin();
@@ -57,16 +68,19 @@
     });
 
     $router->map('POST', '/cliente', function() {
+        verificarLogin();
         $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
         print_r(ClienteController::POST());
     });
 
     $router->map('PUT', '/cliente', function() {
+        verificarLogin();
         $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
         print_r(ClienteController::PUT());
     });
 
     $router->map('DELETE', '/cliente', function() {
+        verificarLogin();
         $cClienteController = require __DIR__ . '/../app/presentation/controllers/cliente.controller.php';   
         print_r(ClienteController::DELETE());
     });
@@ -76,7 +90,9 @@
         call_user_func($match['target']);
     } else {
         http_response_code(404);
-        echo "Página não encontrada!";
+        //echo "Página não encontrada!";
+        $arr = array('success' => false, 'message' => 'Página não encontrada!', 'data' => '{}', 'errors' => "500");
+        print_r(json_encode($arr));
     }
 
 
