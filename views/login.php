@@ -12,12 +12,12 @@
     
     <form method="POST" action="/login">
         <div class="mb-3">
-            <label class="form-label">Usuário</label>
-            <input type="text" name="usuario"  value="" class="form-control" required>
+            <label class="form-label">Login</label>
+            <input type="text" name="cd_login" class="form-control" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Senha</label>
-            <input type="password" name="senha" class="form-control" required>
+            <input type="password" name="ds_senha" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">Entrar</button>
     </form>

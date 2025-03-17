@@ -15,24 +15,25 @@
     $router->map('POST', '/login', function() {
         $dados = json_decode(file_get_contents('php://input'), true);
         
-        $usuario = $dados['cd_login'] ?? '';
-        $senha = $dados['ds_Senha'] ?? '';
+        $usuario = $_POST['cd_login'] ?? '';
+        $senha = $_POST['ds_senha'] ?? '';
 
         $cUsuarioController = require __DIR__ . '/../app/presentation/controllers/usuario.controller.php';   
-        $cLogin = UsuarioController::POST_LOGIN();
+        $cLogin = UsuarioController::POST_LOGIN($usuario,$senha);
 
-        session_start();
-        if ($cLogin === true) { 
-            $_SESSION['usuario_logado'] = $usuario;
+        
+        if ($cLogin === 1) { 
+            session_start();
+            $_SESSION['usuario_logado'] = $cLogin;
             header("Location: /portal-admin"); 
-        } else if($cLogin === false){
+        } else if($cLogin === 0){
             http_response_code(401);
-            echo json_encode(["error" => "Credenciais inválidas!"]);
+            header("Location: /home");
         } else {
             http_response_code(400);
             print_r($cLogin);
         }
-
+            
     });
 
     $router->map('GET', '/login', function() {       

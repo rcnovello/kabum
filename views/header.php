@@ -33,8 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/cliente">Cliente</a></li>                                                
-                <li class="nav-item"><a class="nav-link" href="/usuario">Usuario</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cliente">Cliente</a></li>                                                                
                 <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 <li class="nav-item"><a class="nav-link" href="/sobre">Sobre o Projeto</a></li>
