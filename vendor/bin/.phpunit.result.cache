@@ -1,1 +1,1 @@
-{"version":1,"defects":{"ClienteControllerTest::testDeletarCliente":8},"times":{"ClienteControllerTest::testDeletarCliente":0.083}}
+{"version":1,"defects":{"ClienteControllerTest::testDeletarCliente":8,"IndexTest::testLoginAPI":7,"IndexTest::testApiClientes":7,"IndexTest::testPaginaNaoEncontrada":7},"times":{"ClienteControllerTest::testDeletarCliente":0.083,"IndexTest::testHomePage":0.04,"IndexTest::testLoginPage":0.03,"IndexTest::testLoginAPI":0.084,"IndexTest::testApiClientes":0.078,"IndexTest::testPaginaNaoEncontrada":0.032}}
