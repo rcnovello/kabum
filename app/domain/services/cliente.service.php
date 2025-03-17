@@ -82,14 +82,14 @@ class ClienteService {
         }
     }
 
-    public function delete_cliente(Cliente $cliente): array {
+    public function delete_cliente($id): array {
         try {        
             $pdo = Database::getConnection();
             $sql = "DELETE FROM cliente WHERE cd_cliente = :cd_cliente";
 
             $stmt = $pdo->prepare($sql); 
 
-            $stmt->bindValue(':cd_cliente', $cliente->getCdCliente());
+            $stmt->bindValue(':cd_cliente', $id);
             
             $stmt->execute();     
 

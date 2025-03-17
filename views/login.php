@@ -1,7 +1,5 @@
 
 <?php
-    //echo json_encode(["Login" => " PHP!", "data" => date("d/m/Y H:i:s")]);
-
 
     require_once __DIR__ . '/header.php';
 
@@ -15,7 +13,7 @@
     <form method="POST" action="/login">
         <div class="mb-3">
             <label class="form-label">Usuário</label>
-            <input type="text" name="usuario"  value="40591386810" class="form-control" required>
+            <input type="text" name="usuario"  value="" class="form-control" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Senha</label>

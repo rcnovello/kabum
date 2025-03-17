@@ -24,7 +24,6 @@ class Cliente {
         $this->nr_telefone = $nr_telefone;
     }
 
-    // Métodos Getters
     public function getCdCliente(): ?int {
         return $this->cd_cliente;
     }
@@ -49,7 +48,6 @@ class Cliente {
         return $this->nr_telefone;
     }
 
-    // Métodos Setters
     public function setNmCliente(string $nm_cliente) {
         $this->nm_cliente = $nm_cliente;
     }

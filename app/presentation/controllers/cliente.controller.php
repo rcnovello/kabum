@@ -17,7 +17,7 @@ class ClienteController {
         return json_encode(self::$clienteService->find_all_cliente());
     }
 
-    public static function POST() {
+    public static function POST($dados) {
 
         if (self::$clienteService === null) {
             require_once __DIR__ . '/../../domain/entities/cliente.entity.php';
@@ -26,11 +26,11 @@ class ClienteController {
         }
 
         $cliente = new Cliente(
-            $dados['nm_cliente'] ?? '',
-            $dados['dt_nasc'] ?? '',
-            $dados['nr_cpf'] ?? '',
-            $dados['nr_rg'] ?? '',
-            $dados['nr_telefone'] ?? '',
+            $dados['nm_cliente'],
+            $dados['dt_nasc'],
+            $dados['nr_cpf'],
+            $dados['nr_rg'],
+            $dados['nr_telefone'],
         );
         
         return json_encode(self::$clienteService->create_cliente($cliente));
@@ -64,16 +64,9 @@ class ClienteController {
             self::$clienteService = new ClienteService();
         }
 
-        $cliente = new Cliente(
-            $dados['nm_cliente'],
-            $dados['dt_nasc'],
-            $dados['nr_cpf'],
-            $dados['nr_rg'],
-            $dados['nr_telefone'],
-            $dados['cd_cliente']
-        );
-        
-        return json_encode(self::$clienteService->delete_cliente($cliente));
+        $id = $dados['cd_cliente'];
+
+        return json_encode(self::$clienteService->delete_cliente($id));
     }
 
 }

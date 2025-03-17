@@ -15,7 +15,6 @@ class Usuario {
         $this->ds_senha = $ds_senha;
     }
 
-     // GETTERS
      public function getCdUsuario(): ?int {
         return $this->cd_usuario;
     }
@@ -28,7 +27,6 @@ class Usuario {
         return $this->ds_senha;
     }
 
-    // SETTERS
     public function setCdUsuario(?int $cd_usuario): void {
         $this->cd_usuario = $cd_usuario;
     }

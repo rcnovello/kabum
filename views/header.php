@@ -7,6 +7,19 @@
     <title>Teste Kabum :: Ronni Novello</title>
     <link rel="icon" type="image/x-icon" href="./src/img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030; 
+        }
+        
+        body {
+            padding-top: 56px; 
+        }
+    </style>
 </head>
 <body>
 

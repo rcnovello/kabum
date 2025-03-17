@@ -4,7 +4,6 @@
     require __DIR__ . '/../vendor/autoload.php';
     $router = new AltoRouter();
 
-    // Função para verificar login
     function verificarLogin() {
         session_start();
         if (!isset($_SESSION["usuario_logado"])) {
@@ -25,8 +24,7 @@
         session_start();
         if ($cLogin === true) { 
             $_SESSION['usuario_logado'] = $usuario;
-            //echo json_encode(["message" => "Login bem-sucedido!"]);
-            header("Location: /home"); // Redireciona para a área logada
+            header("Location: /portal-admin"); 
         } else if($cLogin === false){
             http_response_code(401);
             echo json_encode(["error" => "Credenciais inválidas!"]);
@@ -37,7 +35,6 @@
 
     });
 
-    // Rota de logout
     $router->map('GET', '/login', function() {       
         session_start();
         if (!isset($_SESSION["usuario_logado"])) {
@@ -48,22 +45,19 @@
         
     });
 
-    // Rota de logout
     $router->map('GET', '/', function() {        
         require __DIR__ . '/../views/home.php';
     });
 
     $router->map('GET', '/home', function() {       
-        //verificarLogin(); 
         require __DIR__ . '/../views/home.php';
     });
 
 
-    // Rota de logout
     $router->map('GET', '/logout', function() {
         session_start();
         session_destroy();
-        header("Location: /home");
+        header("Location: /login");
     });
 
     $router->map('GET', '/portal-admin', function() {
@@ -77,7 +71,6 @@
         require __DIR__ . '/../views/sobre.php';
         
     });
-
 
 
     $router->map('GET', '/api/cliente', function() {
@@ -106,13 +99,10 @@
     });
 
     $router->map('DELETE', '/api/cliente', function() {
-        verificarLogin();
-        $dados = json_decode(file_get_contents('php://input'), true);  
-        $cClienteController = require_once __DIR__ . '/../app/presentation/controllers/cliente.controller.php';       
-        $clienteController = new ClienteController();  
-        $resultado = $clienteController->delete($dados['cd_cliente']);  
-        header('Content-Type: application/json');
-        echo json_encode(["success" => $resultado]);
+        $dados = json_decode(file_get_contents('php://input'), true);
+        $cClienteController = require_once __DIR__ . '/../app/presentation/controllers/cliente.controller.php';               
+        print_r(ClienteController::DELETE($dados));
+
     });
 
     $match = $router->match();
@@ -120,7 +110,6 @@
         call_user_func($match['target']);
     } else {
         http_response_code(404);
-        //echo "Página não encontrada!";
         $arr = array('success' => false, 'message' => 'Página não encontrada!', 'data' => '{}', 'errors' => "500");
         print_r(json_encode($arr));
     }

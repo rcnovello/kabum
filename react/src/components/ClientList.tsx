@@ -45,8 +45,7 @@ export default function ClientList() {
 
   const handleSave = async () => {
     const method = form.cd_cliente ? "PUT" : "POST";
-    const url = form.cd_cliente
-      //? `http://localhost/api/cliente/${form.cd_cliente}`
+    const url = form.cd_cliente      
       ? `http://localhost/api/cliente`
       : `http://localhost/api/cliente`;
 
@@ -57,7 +56,7 @@ export default function ClientList() {
     });
 
     const result: ApiResponse = await response.json();
-    alert(result.data+result.errors);
+    alert(result.message+result.errors);
 
     setModalOpen(false);
     fetchClients();
@@ -65,8 +64,17 @@ export default function ClientList() {
 
 
   const handleDelete = async (id: number) => {
-    const response = await fetch(`http://localhost/api/cliente/${id}`, { method: "DELETE" });
+    
+    const url = `http://localhost/api/cliente`;
+
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: `{"cd_cliente":${id}}`,
+    });  
+    
     const result: ApiResponse = await response.json();
+
     alert(result.message);
     fetchClients();
   };
@@ -74,7 +82,7 @@ export default function ClientList() {
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4 text-center">Lista de Clientes</h2>
+      <h2 className="mb-4 text-center">Portal Administrativo :: Lista de Clientes</h2>
 
       <button
         className="btn btn-primary mb-3"
