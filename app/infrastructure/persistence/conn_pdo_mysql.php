@@ -18,9 +18,9 @@ class Database {
             $dotenv->load();
 
             $host = $_ENV['DB_HOST'] ?? 'localhost';
-            $dbname = $_ENV['DB_NAME'] ?? 'test';
+            $dbname = $_ENV['DB_NAME'] ?? 'kabum';
             $user = $_ENV['DB_USER'] ?? 'root';
-            $password = $_ENV['DB_PASSWORD'] ?? '';
+            $password = $_ENV['DB_PASSWORD'] ?? 'root';
             $port = $_ENV['DB_PORT'] ?? '3306';
 
             try {

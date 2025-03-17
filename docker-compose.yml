@@ -3,7 +3,7 @@ services:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       #- ./public:/var/www/html
       #- ./public:/mnt/c/Users/ronninovello/Documents/GitHub/kabum
@@ -24,7 +24,8 @@ services:
     networks:
       - app_network
   db:
-    image: mysql:5.5.62
+    #image: mysql:5.5.62
+    image: mysql:5.6
     container_name: mysql-test
     environment:
       MYSQL_ROOT_PASSWORD: root
