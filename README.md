@@ -1,8 +1,9 @@
 # kabum
  
 Teste Fullstack Kabum - Ronni Novello
-Trello: [
-](https://trello.com/invite/b/67d2d5e9f3f5dea600af59af/ATTIc460ed9222cc01555c2c50b999062241CA257363/kabum)
+
+Trello: https://trello.com/invite/b/67d2d5e9f3f5dea600af59af/ATTIc460ed9222cc01555c2c50b999062241CA257363/kabum
+
 🚀 Visão Geral
 
 Este projeto foi desenvolvido para demonstrar uma estrutura modularizada utilizando PHP, similar ao que é utilizado em frameworks como NestJS para Node.js.
